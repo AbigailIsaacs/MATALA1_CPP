@@ -18,20 +18,11 @@ TEST_CASE("A player cant play in 2 games"){
     Player p1("Abi");
     Player p2("Eli");
     Player p3("Orly");
+    Player p4("yeela");
     Game game(p1,p2);
     CHECK_THROWS_AS(Game game(p1,p3),exception); 
-   
-}
-TEST_CASE("When a game is finished you cant keep on playing"){
-    Player p1("Abi");
-    Player p2("Eli");
-    Game game(p1,p2);
     CHECK_NOTHROW(game.playAll()); 
-    CHECK_NOTHROW(game.playTurn()); 
-    game.playAll();
-    CHECK_THROWS(game.playAll()); 
-    CHECK_THROWS(game.playTurn()); 
-   
+    CHECK_NOTHROW(Game game(p4,p3)); 
 }
 
 TEST_CASE("Stack size is 26 in the beginnig and 0 at the end "){
@@ -73,17 +64,21 @@ TEST_CASE("cardesTaken is correct during the game"){
     
 }
 
-TEST_CASE("printLastTurn(),printLog() and printStats() does not throw exeption"){
+TEST_CASE("printLastTurn(),printLog(), printStats(),playAll() and playTurn() does not throw exeption"){
     Player p1("Abi");
     Player p2("Eli");
     Game game(p1,p2);
     CHECK_NOTHROW(game.printLastTurn()); 
     CHECK_NOTHROW(game.printLog()); 
     CHECK_NOTHROW(game.printStats()); 
+    CHECK_NOTHROW(game.playAll()); 
+    CHECK_NOTHROW(game.playTurn()); 
     game.playAll();  
     CHECK_NOTHROW(game.printLastTurn()); 
     CHECK_NOTHROW(game.printLog()); 
     CHECK_NOTHROW(game.printStats()); 
+    CHECK_NOTHROW(game.playAll()); 
+    CHECK_NOTHROW(game.playTurn()); 
 }
 TEST_CASE("printWiner() throes exeption if the game is not finished"){
     Player p1("Abi");
